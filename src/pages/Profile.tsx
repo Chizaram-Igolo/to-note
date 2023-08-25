@@ -22,7 +22,25 @@ export default function Profile() {
 
   const handleFileChange = (event: React.FormEvent<HTMLInputElement>) => {
     // @ts-ignore
+    const fad = event.target;
     const file = event.target.files[0];
+
+    console.log(file);
+
+    // FileReader function for read the file.
+    let fileReader = new FileReader();
+    // Onload of file read the file content
+    fileReader.onload = function (fileLoadedEvent) {
+      const iop = fileLoadedEvent.target.result;
+      // Print data in console
+      console.log(iop);
+      setSelectedFile(iop);
+    };
+    // Convert data to base64
+
+    console.log(fileReader.readAsDataURL(file));
+
+    console.log(fad.result);
     setSelectedFile(file);
     setErrorMessage("");
   };
@@ -43,18 +61,30 @@ export default function Profile() {
     const formData = new FormData();
     formData.append("files", selectedFile);
 
+    console.log("dd");
+
     // console.log(formData);
-    // console.log(selectedFile);
+    console.log(selectedFile);
 
     // for (var pair of formData.entries()) {
     //   console.log(pair[0] + ", " + pair[1]);
     // }
 
+    // const response = await uploadDocument(
+    //   {
+    //     title: selectedFile.name.split(".")[0],
+    //     files: selectedFile,
+    //   },
+    //   token
+    // );
+
+    // console.log(response);
+
     try {
       const response = await uploadDocument(
         {
-          title: selectedFile.name.split(".")[0],
-          files: formData,
+          title: "File",
+          files: [selectedFile],
         },
         token
       ).then((res) => res.data);
@@ -64,6 +94,8 @@ export default function Profile() {
       // setSubmitting(false);
       // navigate("/profile", { state: { token } });
     } catch (err) {
+      // @ts-ignore
+      console.log(err.message);
       if (axios.isAxiosError(err))
         setErrorMessage(
           `An error occured while attempting to upload: ${err.message}`

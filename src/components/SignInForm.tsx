@@ -32,7 +32,7 @@ export default function SignUpForm() {
       );
 
       setSubmitting(false);
-      navigate("/profile", { state: { token } });
+      navigate("/dashboard", { state: { token } });
     } catch (err) {
       if (axios.isAxiosError(err))
         setErrorMessage(
