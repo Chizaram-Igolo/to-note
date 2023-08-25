@@ -1,46 +1,45 @@
+import { useState } from "react";
 import { Formik } from "formik";
+import axios from "axios";
 import ValidationErrorMessage from "./ValidationErrorMessage";
 import {
-  RegisterValues,
+  LoginValues,
   SetSubmitting,
-  regValidationSchema,
+  loginValidationSchema,
 } from "../utils/types";
-import { register } from "../utils/api";
+import { login } from "../utils/api";
 
 import { useNavigate } from "react-router-dom";
+import AlertMessage from "./AlertMessage";
 
-const emptyValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+const emptyValues = { email: "", password: "" };
 
 export default function SignUpForm() {
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const initialValues = { ...emptyValues };
 
   async function onSubmit(
-    values: RegisterValues,
+    values: LoginValues,
     { setSubmitting }: { setSubmitting: SetSubmitting }
   ) {
-    const {
-      firstName: first_name,
-      lastName: last_name,
-      email,
-      password,
-    } = values;
-    const role = "User";
+    const { email, password } = values;
+    const entry_point = "User";
 
-    register({ first_name, last_name, email, password, role })
-      .then(() => {})
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const token = await login({ email, password, entry_point }).then(
+        (res) => res.data
+      );
 
-    setSubmitting(false);
-    navigate("/register-success", { state: { first_name, last_name, email } });
+      setSubmitting(false);
+      navigate("/profile", { state: { token } });
+    } catch (err) {
+      if (axios.isAxiosError(err))
+        setErrorMessage(
+          `An error occured while attempting to login: ${err.message}`
+        );
+      else if (err instanceof Error) setErrorMessage(err.message);
+    }
   }
 
   return (
@@ -48,7 +47,7 @@ export default function SignUpForm() {
       <div className="bg-white p-8 rounded shadow-md max-w-md w-full">
         <Formik
           initialValues={initialValues}
-          validationSchema={regValidationSchema}
+          validationSchema={loginValidationSchema}
           onSubmit={onSubmit}
         >
           {({
@@ -63,41 +62,10 @@ export default function SignUpForm() {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
-              <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-              <div className="mb-4">
-                <label htmlFor="firstName" className="block font-medium mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  className="w-full border rounded p-2"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstName}
-                />
-                {errors.firstName && touched.firstName && (
-                  <ValidationErrorMessage message={errors.firstName} />
-                )}
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="lastName" className="block font-medium mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  className="w-full border rounded p-2"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastName}
-                />
-                {errors.lastName && touched.lastName && (
-                  <ValidationErrorMessage message={errors.lastName} />
-                )}
-              </div>
-
+              <h2 className="text-2xl font-bold mb-4">Login</h2>
+              {errorMessage && (
+                <AlertMessage type="error" message={errorMessage} />
+              )}
               <div className="mb-4">
                 <label htmlFor="email" className="block font-medium mb-1">
                   Email Address
@@ -132,26 +100,6 @@ export default function SignUpForm() {
                 )}
               </div>
 
-              <div className="mb-4">
-                <label
-                  htmlFor="confirmPassword"
-                  className="block font-medium mb-1"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  className="w-full border rounded p-2"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.confirmPassword}
-                />
-                {errors.confirmPassword && touched.confirmPassword && (
-                  <ValidationErrorMessage message={errors.confirmPassword} />
-                )}
-              </div>
-
               <button
                 type="submit"
                 className={`w-full ${
@@ -165,7 +113,7 @@ export default function SignUpForm() {
                 } `}
                 disabled={!isValid || !dirty || isSubmitting}
               >
-                Sign Up
+                Login
               </button>
             </form>
           )}

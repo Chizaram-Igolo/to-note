@@ -5,13 +5,7 @@ export function isEmail(email: string) {
 }
 
 export function validate(values: RegisterValues) {
-  const errors: RegisterErrors = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
+  const errors: RegisterErrors = {};
 
   const { firstName, lastName, email, password, confirmPassword } = values;
 
