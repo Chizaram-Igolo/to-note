@@ -1,13 +1,13 @@
 import { Formik } from "formik";
-import ValidationErrorMessage from "./ValidationErrorMessage";
+import ValidationErrorMessage from "../../components/ValidationErrorMessage";
 import {
   RegisterValues,
   SetSubmitting,
   regValidationSchema,
-} from "../utils/types";
-import { register } from "../utils/api";
+} from "../../utils/types";
+import { register } from "../../utils/api";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const emptyValues = {
   firstName: "",
@@ -17,7 +17,7 @@ const emptyValues = {
   confirmPassword: "",
 };
 
-export default function SignUpForm() {
+export default function SignUp() {
   const navigate = useNavigate();
   const initialValues = { ...emptyValues };
 
@@ -77,7 +77,9 @@ export default function SignUpForm() {
                   value={values.firstName}
                 />
                 {errors.firstName && touched.firstName && (
-                  <ValidationErrorMessage message={errors.firstName} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.firstName}
+                  </span>
                 )}
               </div>
 
@@ -94,7 +96,9 @@ export default function SignUpForm() {
                   value={values.lastName}
                 />
                 {errors.lastName && touched.lastName && (
-                  <ValidationErrorMessage message={errors.lastName} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.lastName}
+                  </span>
                 )}
               </div>
 
@@ -111,7 +115,9 @@ export default function SignUpForm() {
                   value={values.email}
                 />
                 {errors.email && touched.email && (
-                  <ValidationErrorMessage message={errors.email} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.email}
+                  </span>
                 )}
               </div>
 
@@ -128,7 +134,9 @@ export default function SignUpForm() {
                   value={values.password}
                 />
                 {errors.password && touched.password && (
-                  <ValidationErrorMessage message={errors.password} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.password}
+                  </span>
                 )}
               </div>
 
@@ -148,7 +156,9 @@ export default function SignUpForm() {
                   value={values.confirmPassword}
                 />
                 {errors.confirmPassword && touched.confirmPassword && (
-                  <ValidationErrorMessage message={errors.confirmPassword} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.confirmPassword}
+                  </span>
                 )}
               </div>
 
@@ -170,6 +180,13 @@ export default function SignUpForm() {
             </form>
           )}
         </Formik>
+
+        <div className="mt-5">
+          Don't have an account?{" "}
+          <Link to="/login" className="text-blue-800">
+            Login here
+          </Link>
+        </div>
       </div>
     </div>
   );

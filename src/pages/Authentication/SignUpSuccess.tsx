@@ -1,12 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 
 function SignUpSuccess() {
-  //   const { state } = useLocation();
-  //   const { first_name, last_name, email } = state;
-
-  const first_name = "";
-  const last_name = "";
-  const email = "";
+  const { state } = useLocation();
+  const { first_name, last_name, email } = state;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

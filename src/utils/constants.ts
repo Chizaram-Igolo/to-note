@@ -31,3 +31,26 @@ export const initalUserValues = {
   system_verification: false,
   updated_at: "",
 };
+
+export const initialDocumentValues = {
+  id: "",
+  title: "",
+  status: "",
+  participants_count: 0,
+  parent_id: null,
+  is_the_owner_of_document: true,
+  document_owner: "e",
+  seals_count: 0,
+  tools_count: 0,
+  uploads_count: 0,
+  created_at: "",
+  updated_at: "",
+  deleted_at: null,
+  is_a_signlink_docs: false,
+  public: true,
+  is_a_template: false,
+  entry_point: "",
+  completed_file_request: null,
+  all_participants_has_signed: false,
+  signed_signatures: null,
+};

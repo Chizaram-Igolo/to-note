@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Cookies from "universal-cookie";
+
 import { getProfile, uploadDocument } from "../utils/api";
-import { User } from "../utils/types";
+import { UserType } from "../utils/types";
 import { initalUserValues } from "../utils/constants";
 import AlertMessage from "../components/AlertMessage";
 
 export default function Profile() {
+  const cookies = new Cookies();
   const [selectedFile, setSelectedFile] = useState<File>();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [token, setToken] = useState("");
 
-  const { state } = useLocation();
-  const { token } = state;
+  useEffect(() => {
+    const token = cookies.get("to-note-token");
+    setToken(token);
 
-  const [user, setUser] = useState<User>(initalUserValues);
+    getProfile({ token, token_type: "bearer" }).then((res) =>
+      setUser(res.data.data)
+    );
+  }, []);
+
+  const [user, setUser] = useState<UserType>(initalUserValues);
 
   useEffect(() => {
     getProfile(token).then((res) => setUser(res.data.data));

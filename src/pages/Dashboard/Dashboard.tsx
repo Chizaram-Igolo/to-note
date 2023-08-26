@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { User } from "../utils/types";
-import { getDocument, getProfile } from "../utils/api";
-import { initalUserValues } from "../utils/constants";
+import { Routes, Route, Link, useLocation, Outlet } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { UserType } from "../../utils/types";
+import { getDocument, getProfile } from "../../utils/api";
+import { initalUserValues } from "../../utils/constants";
+import UploadDocument from "./UploadDocument";
+import ViewDocument from "./DocumentsList";
+import SignDocument from "./SignDocument";
 
 export default function Dashboard() {
-  const { state } = useLocation();
-  const { token } = state;
+  const cookies = new Cookies();
+  const [token, setToken] = useState("");
 
-  const [user, setUser] = useState<User>(initalUserValues);
+  const [user, setUser] = useState<UserType>(initalUserValues);
 
   useEffect(() => {
-    getProfile(token).then((res) => setUser(res.data.data));
+    const storedToken = cookies.get("to-note-token");
+
+    setToken(storedToken);
+    getProfile({ token: storedToken, token_type: "bearer" }).then((res) =>
+      setUser(res.data.data)
+    );
 
     console.log(user);
   }, []);
@@ -30,7 +39,7 @@ export default function Dashboard() {
     try {
       const response = await getDocument(
         "99f98ad2-1ece-490a-8ba7-446db0dd30a6",
-        token
+        { token, token_type: "bearer" }
       ).then((res) => res.data);
 
       console.log(response);
@@ -61,36 +70,45 @@ export default function Dashboard() {
             <p className="text-sm">{user.email}</p>
           </div>
 
-          <div class="relative">
+          <div className="relative">
             <img
-              className="w-10 h-10 rounded-full border-2 border-white rounded-full dark:border-gray-800"
+              className="w-10 h-10 rounded-full border-2 border-white rounded-full"
               src={`${user.image}files/admin-3c75b0daa0b611ec8d76a72c3c888e07/settings/image/d7062a42-1b2a-4973-9945-03abb1fffad6.png`}
               alt=""
             />
-            <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white  rounded-full"></span>
           </div>
         </div>
         <ul className="space-y-2">
           {/* Replace with actual collections */}
           <li>
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link to="/dashboard" className="text-blue-600 hover:underline">
               Upload a Document
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link
+              to="/dashboard/view-document"
+              className="text-blue-600 hover:underline"
+            >
               View a Document
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link
+              to="/dashboard/sign-document"
+              className="text-blue-600 hover:underline"
+            >
               Sign a Document
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
-      <div className="w-3/4 p-4">
-        <h1 className="text-lg font-semibold mb-4">Request Builder</h1>
+
+      <Outlet />
+
+      {/* <div className="w-3/4 p-4">
+        <h1 className="text-lg font-semibold mb-4">Upload a PDF</h1>
         <div className="flex space-x-4 mb-4">
           <select
             className="w-1/5 border p-1"
@@ -118,7 +136,7 @@ export default function Dashboard() {
         </div>
         <h1 className="text-lg font-semibold mb-2">Response</h1>
         <pre className="border p-4 bg-gray-100">{response}</pre>
-      </div>
+      </div> */}
     </div>
   );
 }

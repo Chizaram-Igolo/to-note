@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { RegisterErrors, RegisterValues } from "./types";
 
 export function isEmail(email: string) {

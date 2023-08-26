@@ -1,26 +1,82 @@
-import SignUp from "./pages/SignUp";
-import "./App.css";
-
+import { useState, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import SignUpSuccess from "./pages/SignUpSuccess";
-import SignIn from "./pages/SignIn";
+import Cookies from "universal-cookie";
+
+import SignUpSuccess from "./pages/Authentication/SignUpSuccess";
+import SignUp from "./pages/Authentication/SignUp";
+import SignIn from "./pages/Authentication/SignIn";
 import Profile from "./pages/Profile";
 import Sidebar from "./components/Sidebar";
 import DocumentUploadForm from "./components/UploadForm";
-import Dashboard from "./pages/Dashboard";
+
+import "./App.css";
+
+import Protected from "./pages/Authentication/Protected";
+import UploadDocument from "./pages/Dashboard/UploadDocument";
+import ViewDocument from "./pages/Dashboard/ViewDocument";
+import SignDocument from "./pages/Dashboard/SignDocument";
+import DocumentsList from "./pages/Dashboard/DocumentsList";
 
 function App() {
+  const cookies = new Cookies();
+  const [appCookies, setAppCookies] = useState("");
+  const [isAppCookies, setIsAppCookies] = useState(false);
+
+  useEffect(() => {
+    setAppCookies(cookies.get("to-note-token"));
+    setIsAppCookies(true);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignUp />} />
-
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/register-success" element={<SignUpSuccess />} />
-        <Route path="/upload-form" element={<DocumentUploadForm />} />
-        <Route path="/side-bar" element={<Sidebar />} />
-        <Route path="/profile" element={<Profile />} />
+
+        {isAppCookies && (
+          <Route
+            path="*"
+            element={
+              <Protected isLoggedIn={Boolean(appCookies)}>
+                <div className="relative flex h-screen">
+                  <Sidebar />
+
+                  <div className="min-w-[900px] w-[100%] ml-[300px]">
+                    <Routes>
+                      {/* <Route path="/" element={<Dashboard />} /> */}
+                      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                      <Route
+                        path="/dashboard/upload-document"
+                        element={<UploadDocument />}
+                      />
+                      <Route
+                        path="/dashboard/view-document"
+                        element={<DocumentsList />}
+                      />
+                      <Route
+                        path="/dashboard/view-document/:id"
+                        element={<ViewDocument />}
+                      />
+                      <Route
+                        path="/dashboard/sign-document"
+                        element={<SignDocument />}
+                      />
+                      {/* </Route> */}
+
+                      <Route
+                        path="/upload-form"
+                        element={<DocumentUploadForm />}
+                      />
+                      <Route path="/side-bar" element={<Sidebar />} />
+                      <Route path="/profile" element={<Profile />} />
+                    </Routes>
+                  </div>
+                </div>
+              </Protected>
+            }
+          />
+        )}
       </Routes>
     </BrowserRouter>
   );

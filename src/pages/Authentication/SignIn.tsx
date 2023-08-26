@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik } from "formik";
+import Cookies from "universal-cookie";
 import axios from "axios";
-import ValidationErrorMessage from "./ValidationErrorMessage";
 import {
   LoginValues,
   SetSubmitting,
   loginValidationSchema,
-} from "../utils/types";
-import { login } from "../utils/api";
+} from "../../utils/types";
+import { login } from "../../utils/api";
 
-import { useNavigate } from "react-router-dom";
-import AlertMessage from "./AlertMessage";
+import { Link, useNavigate } from "react-router-dom";
+import AlertMessage from "../../components/AlertMessage";
 
 const emptyValues = { email: "", password: "" };
 
-export default function SignUpForm() {
+export default function SignIn() {
+  const cookies = new Cookies();
+
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const initialValues = { ...emptyValues };
+
+  // useEffect(() => {
+  //   const token = cookies.get("to-note-token");
+
+  //   if (token) {
+  //     navigate("/dashboard", { state: { token } });
+  //   }
+  // }, []);
 
   async function onSubmit(
     values: LoginValues,
@@ -31,8 +41,12 @@ export default function SignUpForm() {
         (res) => res.data
       );
 
+      console.log(token);
+
+      cookies.set("to-note-token", token.token);
+
       setSubmitting(false);
-      navigate("/dashboard", { state: { token } });
+      navigate("/dashboard/upload-document", { state: { token } });
     } catch (err) {
       if (axios.isAxiosError(err))
         setErrorMessage(
@@ -79,7 +93,9 @@ export default function SignUpForm() {
                   value={values.email}
                 />
                 {errors.email && touched.email && (
-                  <ValidationErrorMessage message={errors.email} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.email}
+                  </span>
                 )}
               </div>
 
@@ -96,7 +112,9 @@ export default function SignUpForm() {
                   value={values.password}
                 />
                 {errors.password && touched.password && (
-                  <ValidationErrorMessage message={errors.password} />
+                  <span className="inline-block whitespace-nowrap rounded-[0.27rem] bg-red-100 px-[0.65em] pb-[0.5em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-red-700">
+                    {errors.password}
+                  </span>
                 )}
               </div>
 
@@ -118,6 +136,13 @@ export default function SignUpForm() {
             </form>
           )}
         </Formik>
+
+        <div className="mt-5">
+          Don't have an account?{" "}
+          <Link to="/register" className="text-blue-800">
+            Sign up here
+          </Link>
+        </div>
       </div>
     </div>
   );
