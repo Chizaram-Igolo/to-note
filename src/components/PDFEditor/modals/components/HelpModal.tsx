@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Modal, Accordion, Icon, AccordionTitleProps } from 'semantic-ui-react';
-import { helpContent } from '../../entities/helpContent';
+import React, { useState } from "react";
+import { Modal, Accordion, Icon, AccordionTitleProps } from "semantic-ui-react";
+import { helpContent } from "../../entities/helpContent";
 interface Props {
   open: boolean;
   dismiss: () => void;
@@ -10,6 +10,7 @@ export const HelpModal: React.FC<Props> = ({ open, dismiss }) => {
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const handleClick = (
+    // @ts-ignore
     event: React.MouseEvent<HTMLDivElement>,
     data: AccordionTitleProps
   ) => {
@@ -20,10 +21,10 @@ export const HelpModal: React.FC<Props> = ({ open, dismiss }) => {
 
   return (
     <>
-      <Modal 
-        open={open} 
-        onClose={dismiss} 
-        size="small" 
+      <Modal
+        open={open}
+        onClose={dismiss}
+        size="small"
         dimmer="inverted"
         data-testid="help-modal"
       >

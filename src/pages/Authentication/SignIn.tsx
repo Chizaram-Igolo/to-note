@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Formik } from "formik";
 import Cookies from "universal-cookie";
 import axios from "axios";

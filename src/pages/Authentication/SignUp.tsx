@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import ValidationErrorMessage from "../../components/ValidationErrorMessage";
 import {
   RegisterValues,
   SetSubmitting,

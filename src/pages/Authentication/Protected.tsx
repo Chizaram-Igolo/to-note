@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 interface IProtected {
   isLoggedIn: boolean;
@@ -6,7 +6,7 @@ interface IProtected {
 }
 
 const Protected: React.FC<IProtected> = ({ isLoggedIn, children }) => {
-  const location = useLocation();
+  // const location = useLocation();
 
   if (!isLoggedIn) return <Navigate to="/login" replace />;
 

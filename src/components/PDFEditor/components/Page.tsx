@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   page: any;
@@ -15,7 +15,7 @@ export const Page = ({ page, dimensions, updateDimensions }: Props) => {
     const renderPage = async (p: Promise<any>) => {
       const _page = await p;
       if (_page) {
-        const context = canvasRef.current?.getContext('2d');
+        const context = canvasRef.current?.getContext("2d");
         const viewport = _page.getViewport({ scale: 1 });
 
         setWidth(viewport.width);
@@ -23,7 +23,7 @@ export const Page = ({ page, dimensions, updateDimensions }: Props) => {
 
         if (context) {
           await _page.render({
-            canvasContext: canvasRef.current?.getContext('2d'),
+            canvasContext: canvasRef.current?.getContext("2d"),
             viewport,
           }).promise;
 

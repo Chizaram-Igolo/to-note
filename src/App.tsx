@@ -5,9 +5,7 @@ import Cookies from "universal-cookie";
 import SignUpSuccess from "./pages/Authentication/SignUpSuccess";
 import SignUp from "./pages/Authentication/SignUp";
 import SignIn from "./pages/Authentication/SignIn";
-import Profile from "./pages/Profile";
 import Sidebar from "./components/Sidebar";
-import DocumentUploadForm from "./components/UploadForm";
 
 import "./App.css";
 
@@ -44,8 +42,6 @@ function App() {
 
                   <div className="min-w-[900px] w-[100%] ml-[300px]">
                     <Routes>
-                      {/* <Route path="/" element={<Dashboard />} /> */}
-                      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                       <Route
                         path="/dashboard/upload-document"
                         element={<UploadDocument />}
@@ -64,12 +60,7 @@ function App() {
                       />
                       {/* </Route> */}
 
-                      <Route
-                        path="/upload-form"
-                        element={<DocumentUploadForm />}
-                      />
                       <Route path="/side-bar" element={<Sidebar />} />
-                      <Route path="/profile" element={<Profile />} />
                     </Routes>
                   </div>
                 </div>

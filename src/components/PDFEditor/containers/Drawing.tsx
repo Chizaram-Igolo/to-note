@@ -1,7 +1,7 @@
-import React, { createRef, useEffect, useState } from 'react';
-import { DragActions } from '../entities';
-import { getMovePosition } from '../utils/helpers';
-import { Drawing as DrawingComponent } from '../components/Drawing';
+import React, { createRef, useEffect, useState } from "react";
+import { DragActions } from "../entities";
+import { getMovePosition } from "../utils/helpers";
+import { Drawing as DrawingComponent } from "../components/Drawing";
 
 interface Props {
   pageWidth: number;
@@ -35,11 +35,14 @@ export const Drawing = ({
   useEffect(() => {
     const svg = svgRef.current;
     if (svg) {
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     }
   }, [svgRef, width, height]);
 
-  const handleMousedown = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMousedown = (
+    // @ts-ignore
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
     setMouseDown(true);
     setOperation(DragActions.MOVE);
   };

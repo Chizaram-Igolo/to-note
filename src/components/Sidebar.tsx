@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link, useLocation, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { UserType } from "../utils/types";
-import { getDocument, getProfile } from "../utils/api";
+import { getProfile } from "../utils/api";
 import { initalUserValues } from "../utils/constants";
 
 export default function Sidebar() {
   const cookies = new Cookies();
-  const [token, setToken] = useState("");
-
   const [user, setUser] = useState<UserType>(initalUserValues);
 
   useEffect(() => {
     const storedToken = cookies.get("to-note-token");
 
-    setToken(storedToken);
     getProfile({ token: storedToken, token_type: "bearer" }).then((res) => {
       console.log(res.data);
       setUser(res.data.data);
