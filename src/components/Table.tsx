@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DocumentType } from "../utils/types";
 import { Link } from "react-router-dom";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
+import { formatDate } from "../utils/functions";
 
 export default function Table({ documents }: { documents: DocumentType[] }) {
   const [itemsPerPage] = useState(15);
@@ -74,17 +75,17 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
               </div>
 
               <div className="w-[8%]">
-                <span className="text-xs">
+                <span className="text-sm">
                   {(item.signed_signatures as number) > 0 ? "Yes" : "No"}
                 </span>
               </div>
 
               <div className="w-[18%]">
-                <span className="text-xs">{item.created_at}</span>
+                <span className="text-sm">{formatDate(item.created_at)}</span>
               </div>
 
               <div className="w-[18%]">
-                <span className="text-xs"> {item.updated_at}</span>
+                <span className="text-sm"> {formatDate(item.updated_at)}</span>
               </div>
             </div>
           ))}
