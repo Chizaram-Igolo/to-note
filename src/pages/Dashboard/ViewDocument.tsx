@@ -5,11 +5,7 @@ import Cookies from "universal-cookie";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import {
-  addSelfAsParticipant,
-  getDocument,
-  getDocumentParticipants,
-} from "../../utils/api";
+import { addSelfAsParticipant, getDocument } from "../../utils/api";
 
 // Core viewer
 import { Viewer, Worker } from "@react-pdf-viewer/core";
@@ -40,18 +36,13 @@ export default function ViewDocument() {
     const token = cookies.get("to-note-token");
     setToken(token);
 
-    getDocument("99fbeec9-425f-4a78-840c-120557e7d11c", {
+    getDocument(id as string, {
       token,
       token_type: "bearer",
     }).then((res) => {
       console.log(res);
       setDocument(res.data.data);
       setIsLoading(false);
-    });
-
-    getDocumentParticipants({ token, token_type: "bearer" }).then((res) => {
-      console.log("document Participants", res.data);
-      setDocument(res.data.data);
     });
 
     // console.log(document);
@@ -179,7 +170,11 @@ export default function ViewDocument() {
             <>
               <Viewer
                 fileUrl={
-                  "https://tonote-storage.s3.eu-west-3.amazonaws.com/test-uploads/document/99fb4bda-bb38-482a-8590-8082a35d053e/64e9d47cd45c1.pdf"
+                  // @ts-ignore
+                  document?.documentUploads?.length > 0
+                    ? // @ts-ignore
+                      document?.documentUploads[0].file_url
+                    : "https://tonote-storage.s3.eu-west-3.amazonaws.com/test-uploads/document/99fb4bda-bb38-482a-8590-8082a35d053e/64e9d47cd45c1.pdf"
                 }
                 plugins={[defaultLayoutPluginInstance]}
               />

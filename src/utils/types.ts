@@ -48,8 +48,8 @@ export type EmailInviteData = {
 };
 
 export type Token = {
-  token?: string;
-  token_type?: string;
+  token: string;
+  token_type: string;
 };
 
 export type RegisterErrors = { [K in keyof RegisterValues]?: string };
