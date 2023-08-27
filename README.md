@@ -134,15 +134,9 @@ POST https://dev-api.gettonote.com/api/v1/user/login
     <img src="./screenshots/login.png" alt="Logo" width="600" />
     <p>./src/pages/Authentication/SignIn.tsx</p> 
     <p><strong>Login Screen</strong></p>
-  </div> 
-   <div style="width: 200px; float: left; margin-right: 50px; margin-bottom: 40px;"> 
-    <img src="./screenshots/login.png" alt="Logo" width="600" />
-    <p>./src/pages/Authentication/SignIn.tsx</p> 
-    <p><strong>Login Screen</strong></p>
   </div>
-</div>
 
-<div style="float: left; width: 200px">
+  <div>
 
 ```js
 // ./src/utils/types.ts
@@ -163,6 +157,7 @@ export function login(data: LoginValuesPrepared) {
 }
 ```
 
+</div>
 </div>
 
 <div style="clear: both;"></div>
