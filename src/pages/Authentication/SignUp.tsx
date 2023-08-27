@@ -181,7 +181,7 @@ export default function SignUp() {
         </Formik>
 
         <div className="mt-5">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Link to="/login" className="text-blue-800">
             Login here
           </Link>

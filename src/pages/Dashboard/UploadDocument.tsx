@@ -19,7 +19,9 @@ export default function UploadDocument() {
     setToken(token);
   }, []);
 
-  const handleFileChange = (event: React.FormEvent<HTMLInputElement>) => {
+  type FileChangeEventType = React.FormEvent<HTMLInputElement>;
+
+  function handleFileChange(event: FileChangeEventType) {
     // @ts-ignore
     const file = event.target.files[0];
 
@@ -48,7 +50,7 @@ export default function UploadDocument() {
 
     setSelectedFile(file);
     setErrorMessage("");
-  };
+  }
 
   const handleUpload = async () => {
     if (!selectedFile) {
