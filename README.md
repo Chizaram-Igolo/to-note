@@ -137,6 +137,8 @@ POST https://dev-api.gettonote.com/api/v1/user/login
   </div>
 </div>
 
+<div>
+
 ```js
 // ./src/utils/types.ts
 export type LoginValuesPrepared = {
@@ -155,6 +157,8 @@ export function login(data: LoginValuesPrepared) {
   });
 }
 ```
+
+</div>
 
 <div style="clear: both;"></div>
 
