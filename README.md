@@ -137,7 +137,7 @@ POST https://dev-api.gettonote.com/api/v1/user/login
   </div>
 </div>
 
-<div>
+<div style="float: left; width: 200px">
 
 ```js
 // ./src/utils/types.ts
