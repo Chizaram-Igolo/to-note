@@ -129,6 +129,47 @@ i. Logging in
 POST https://dev-api.gettonote.com/api/v1/user/login
 ```
 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+  
+<img src="./screenshots/login.png" alt="Logo" width="600" />
+<p>./src/pages/Authentication/SignIn.tsx</p> 
+<p><strong>Login Screen</strong></p>
+</td>
+<td>
+
+```js
+// ./src/utils/types.ts
+export type LoginValuesPrepared = {
+  email: string,
+  password: string,
+  entry_point: string,
+};
+
+// ./src/utils/api.ts
+export function login(data: LoginValuesPrepared) {
+  return axios({
+    method: "post",
+    url: `${API_URL}user/login`,
+    headers,
+    data,
+  });
+}
+```
+
+</td>
+</tr>
+</table>
+
+| AWS                                                          | Git                                           |
+| ------------------------------------------------------------ | --------------------------------------------- |
+| <img src="./screenshots/login.png" alt="Logo" width="600" /> | ![git hooks](images/git-hooks.webp "title B") |
+
 <div style="float: left;">
   <div style="width: 200px; float: left; margin-right: 50px; margin-bottom: 40px;"> 
     <img src="./screenshots/login.png" alt="Logo" width="600" />
