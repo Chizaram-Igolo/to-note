@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Moment from "react-moment";
 
 import { DocumentType } from "../utils/types";
 import { Link } from "react-router-dom";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
-
-// import Fontaw
 
 export default function Table({ documents }: { documents: DocumentType[] }) {
   const [itemsPerPage] = useState(15);
@@ -83,21 +80,11 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
               </div>
 
               <div className="w-[18%]">
-                <span className="text-xs">
-                  <Moment
-                    date={new Date(item.created_at)}
-                    format="Do MMM, YYYY,  hh:mm:ss A"
-                  />
-                </span>
+                <span className="text-xs">{item.created_at}</span>
               </div>
 
               <div className="w-[18%]">
-                <span className="text-xs">
-                  <Moment
-                    date={new Date(item.updated_at)}
-                    format="Do MMM, YYYY,  hh:mm:ss A"
-                  />
-                </span>
+                <span className="text-xs"> {item.updated_at}</span>
               </div>
             </div>
           ))}
