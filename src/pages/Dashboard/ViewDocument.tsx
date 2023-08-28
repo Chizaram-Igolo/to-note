@@ -17,15 +17,13 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import axios from "axios";
 import { DocumentType } from "../../utils/types";
 import EmailInviteForm from "../../components/EmailInviteForm";
-import Navbar from "../../components/Navbar";
 
 export default function ViewDocument() {
   const { id } = useParams();
   const [document, setDocument] = useState<DocumentType>();
   const [isLoading, setIsLoading] = useState(true);
-  const cookies = new Cookies();
-  const [token, setToken] = useState("");
   const [hasAddedSelf, setHasAddedSelf] = useState(false);
+  const [token, setToken] = useState("");
 
   const [showEmailInviteForm, setShowEmailInviteForm] = useState(false);
 
@@ -33,8 +31,8 @@ export default function ViewDocument() {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   useEffect(() => {
-    const token = cookies.get("to-note-token");
-    setToken(token);
+    const loggedIn = localStorage.getItem("to-note") as string;
+    setToken(loggedIn);
 
     getDocument(id as string, {
       token,
@@ -46,7 +44,7 @@ export default function ViewDocument() {
     });
 
     // console.log(document);
-  }, [hasAddedSelf]);
+  }, [hasAddedSelf, id, token]);
 
   const handleAddMeAsParticipant = async () => {
     try {
@@ -74,16 +72,15 @@ export default function ViewDocument() {
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="min-w-[800px] w-[90%] flex flex-col mt-12 ml-8">
+    <div className="min-w-[800px] w-[90%] flex flex-col ml-8">
+      <div className="mt-12 ">
         <h2 className="text-xl font-semibold mb-4">View a Document</h2>
 
         {
           // @ts-ignore
           document?.participants.length > 0 && (
             <div className="mb-4">
-              <span className="font-bold float-left">Participants: </span>
+              <span className="font-bold float-left mb-3">Participants: </span>
               {
                 // @ts-ignore
                 document?.participants.map((p, idx) => (
@@ -117,7 +114,7 @@ export default function ViewDocument() {
             </div>
           )
         }
-        <div className="flex">
+        <div className="clear-both flex">
           <div>
             <button
               onClick={handleAddMeAsParticipant}
@@ -183,6 +180,6 @@ export default function ViewDocument() {
           </Worker>
         )}
       </div>
-    </>
+    </div>
   );
 }

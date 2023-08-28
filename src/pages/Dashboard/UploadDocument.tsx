@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { uploadDocument } from "../../utils/api";
-import Cookies from "universal-cookie";
-import Navbar from "../../components/Navbar";
 
 export default function UploadDocument() {
-  const cookies = new Cookies();
   const [selectedFile, setSelectedFile] = useState<string | ArrayBuffer | null>(
     ""
   );
@@ -15,8 +12,8 @@ export default function UploadDocument() {
   const [evtObj, setEvtObj] = useState(null);
 
   useEffect(() => {
-    const token = cookies.get("to-note-token");
-    setToken(token);
+    const loggedIn = localStorage.getItem("to-note");
+    setToken(loggedIn as string);
   }, []);
 
   type FileChangeEventType = React.FormEvent<HTMLInputElement>;
@@ -91,9 +88,8 @@ export default function UploadDocument() {
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="min-w-[800px] w-[90%] flex flex-col mt-12 ml-8">
+    <div className="min-w-[800px] w-[90%] flex flex-col mt-0 ml-8">
+      <div className="mt-12">
         <h2 className="text-xl font-semibold mb-4">Upload a Document</h2>
         <div className="w-[50%]">
           <label
@@ -130,7 +126,6 @@ export default function UploadDocument() {
             </p>
           )}
         </div>
-
         <div className="mt-4">
           <button
             onClick={handleUpload}
@@ -145,6 +140,6 @@ export default function UploadDocument() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

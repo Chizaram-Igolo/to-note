@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik } from "formik";
-import Cookies from "universal-cookie";
 import axios from "axios";
 import {
   LoginValues,
@@ -15,19 +14,17 @@ import AlertMessage from "../../components/AlertMessage";
 const emptyValues = { email: "", password: "" };
 
 export default function SignIn() {
-  const cookies = new Cookies();
-
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const initialValues = { ...emptyValues };
 
-  // useEffect(() => {
-  //   const token = cookies.get("to-note-token");
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("to-note");
 
-  //   if (token) {
-  //     navigate("/dashboard", { state: { token } });
-  //   }
-  // }, []);
+    if (loggedIn) {
+      navigate("/dashboard", { state: { token: loggedIn } });
+    }
+  }, [navigate]);
 
   async function onSubmit(
     values: LoginValues,
@@ -43,10 +40,10 @@ export default function SignIn() {
 
       console.log(token);
 
-      cookies.set("to-note-token", token.token);
+      localStorage.setItem("to-note", token.token);
 
       setSubmitting(false);
-      navigate("/dashboard/upload-document", { state: { token } });
+      navigate("/dashboard", { state: { token } });
     } catch (err) {
       if (axios.isAxiosError(err))
         setErrorMessage(
