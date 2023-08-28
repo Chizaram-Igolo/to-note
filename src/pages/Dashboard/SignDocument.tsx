@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-// import PDFEditor from "../../components/PDFEditor/PDFEditor";
 
-import Cookies from "universal-cookie";
 import { DndContext, useDroppable, useDraggable } from "@dnd-kit/core";
 import { createSnapModifier, snapCenterToCursor } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
@@ -141,15 +139,11 @@ export default function SignDocument() {
   // Create new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  const cookies = new Cookies();
-  const [token, setToken] = useState("");
-
   const [isLoading, setIsLoading] = useState(true);
   const [document, setDocument] = useState<DocumentType>();
 
   useEffect(() => {
-    const token = cookies.get("to-note-token");
-    setToken(token);
+    const token = localStorage.getItem("to-note") as string;
 
     getDocument(id as string, {
       token,
@@ -159,13 +153,11 @@ export default function SignDocument() {
       setDocument(res.data.data);
       setIsLoading(false);
     });
-
-    // console.log(document);
-  }, []);
+  }, [id]);
 
   return (
-    <>
-      <div className="min-w-[800px] w-[90%] flex flex-col mt-12 ml-8">
+    <div className="min-w-[800px] w-[90%] flex flex-col ml-8">
+      <div className="mt-12">
         <h2 className="text-xl font-semibold mb-4">Sign Your Document</h2>
         {/* <PDFEditor /> */}
         <DragAndDrop />
@@ -190,6 +182,6 @@ export default function SignDocument() {
           </Worker>
         )}
       </div>
-    </>
+    </div>
   );
 }
