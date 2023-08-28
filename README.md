@@ -226,19 +226,19 @@ GET https://dev-api.gettonote.com/api/v1/user/profile
 </tr>
 <tr>
 <td>
-  
-<div style="width: 300px; margin-right: 50px; margin-bottom:40px">
+<div style="width: 300px; margin-bottom: 30px">
 <img src="./screenshots/profile.png" alt="Logo" width="300">
-<span><strong>Name: </strong>John Doe</span>
+<p style="margin-bottom: 0px"><strong>Name: </strong>John Doe</p>
 <p><strong>Email: </strong>user@tonote.com</p>
 </div>
-<div style="width: 300px; margin-right: 50px; margin-bottom: 40px">
+<div style="width: 300px; margin-bottom: 30px">
 <img src="./screenshots/profile2.png" alt="Logo" width="300"> 
-<span><strong>Name: </strong>Woman Woman</span>
+<p style="margin-bottom: 0px"><strong>Name: </strong>Woman Woman</p>
 <p><strong>Email: </strong>wonderwoman@yahoo.com</p>
 </div> 
-<div style="width: 300px; margin-right: 50px; margin-bottom: 40px">
-<img src="./screenshots/profile3.png" alt="Logo" width="300"> <span><strong>Name: </strong>Bill Gates</span>
+<div style="width: 300px; margin-bottom: 30px">
+<img src="./screenshots/profile3.png" alt="Logo" width="300"> 
+<p style="margin-bottom: 0px"><strong>Name: </strong>Bill Gates</p>
 <p><strong>Email: </strong>bill@tonote.com</p>
 </div>
 <p>./src/pages/Authentication/SignIn.tsx</p>
@@ -493,19 +493,19 @@ POST https://dev-api.gettonote.com/api/v1/document-participants-send-email
 <tr>
 <td> 
 <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-<img src="./screenshots/participants.png" alt="Logo" width="600"> 
+<img src="./screenshots/participants.png" alt="Logo" width="400"> 
 <p>Retrieve Participants</p>
 </div> 
 <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-<img src="./screenshots/send-email-invite.png" alt="Logo" width="600"> 
+<img src="./screenshots/send-email-invite.png" alt="Logo" width="400"> 
 <p>Display and Fill Form to Send Email Invite</p>
 </div> 
 <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-<img src="./screenshots/send-email-invite-2.png" alt="Logo" width="600"> 
+<img src="./screenshots/send-email-invite-2.png" alt="Logo" width="400"> 
 <p>Email Invite Successfully Sent</p>
 </div> 
 <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-<img src="./screenshots/participants-2.png" alt="Logo" width="600"> 
+<img src="./screenshots/participants-2.png" alt="Logo" width="400"> 
 <p>Participants List Updated (after page refresh)</p>
 </div> 
 <p>./src/pages/Dashboard/ViewDocument.tsx</p>
