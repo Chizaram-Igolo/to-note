@@ -12,7 +12,7 @@
   <h3 align="center">Frontend Assessment Test</h3>
 
   <p align="center">
-    Collaborative PDF Document Signing Manager
+    Collaborative Document Signing Manager
     <br />
     <a href="https://to-note-omega.vercel.app"><strong>See Live Version »</strong></a>
     <br />
@@ -119,11 +119,9 @@ The following shows the functionality of the application with respect to the end
 export const API_URL = "https://dev-api.gettonote.com/api/v1/";
 ```
 
-<br/>
-
 ### 1. User Authentication
 
-i. Logging in
+<h4 style="font-size: 1.4rem;">i. Logging in</h4>
 
 ```sh
 POST https://dev-api.gettonote.com/api/v1/user/login
@@ -166,56 +164,27 @@ export function login(data: LoginValuesPrepared) {
 </tr>
 </table>
 
-| AWS                                                          | Git                                           |
-| ------------------------------------------------------------ | --------------------------------------------- |
-| <img src="./screenshots/login.png" alt="Logo" width="600" /> | ![git hooks](images/git-hooks.webp "title B") |
+<br/>
 
-<div style="float: left;">
-  <div style="width: 200px; float: left; margin-right: 50px; margin-bottom: 40px;"> 
-    <img src="./screenshots/login.png" alt="Logo" width="600" />
-    <p>./src/pages/Authentication/SignIn.tsx</p> 
-    <p><strong>Login Screen</strong></p>
-  </div>
-
-  <div>
-
-```js
-// ./src/utils/types.ts
-export type LoginValuesPrepared = {
-  email: string,
-  password: string,
-  entry_point: string,
-};
-
-// ./src/utils/api.ts
-export function login(data: LoginValuesPrepared) {
-  return axios({
-    method: "post",
-    url: `${API_URL}user/login`,
-    headers,
-    data,
-  });
-}
-```
-
-</div>
-</div>
-
-<div style="clear: both;"></div>
-
-ii. Registering
+<h4 style="font-size: 1.4rem;">ii. Registering User</h4>
 
 ```sh
 POST https://dev-api.gettonote.com/api/v1/user/register
 ```
 
-<div style="float: left;">
-  <div style="width: 500px; margin-right: 50px; margin-bottom: 40px">
-    <img src="./screenshots/register.png" alt="Logo" width="600">
-    <p>./src/pages/Authentication/SignIn.tsx</p>
-    <p><strong>Register Screen</strong></p> 
-  </div>
-</div>
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+  
+<img src="./screenshots/register.png" alt="Logo" width="600">
+<p>./src/pages/Authentication/SignUp.tsx</p>
+<p><strong>Register Screen</strong></p> 
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
@@ -238,25 +207,44 @@ export function register(data: RegisterValuesPrepared) {
 }
 ```
 
-<div style="clear: both;"></div>
+</td>
+</tr>
+</table>
 
-ii. Profile Details
+<br/>
+
+<h4 style="font-size: 1.4rem;">iii. Profile Details</h4>
 
 ```sh
 GET https://dev-api.gettonote.com/api/v1/user/profile
 ```
 
-<div style="float: left;">
-  <div style="width: 300px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/profile.png" alt="Logo" width="600">
-    <p>./src/pages/Authentication/SignIn.tsx</p> 
-  </div>
-  <div style="width: 300px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/profile2.png" alt="Logo" width="600">
-  </div>
-<p>./src/pages/Authentication/SignIn.tsx</p>
-<p><strong>Register Screen</strong></p> 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+  
+<div style="width: 300px; margin-right: 50px; margin-bottom:40px">
+<img src="./screenshots/profile.png" alt="Logo" width="300">
+<span><strong>Name: </strong>John Doe</span>
+<p><strong>Email: </strong>user@tonote.com</p>
 </div>
+<div style="width: 300px; margin-right: 50px; margin-bottom: 40px">
+<img src="./screenshots/profile2.png" alt="Logo" width="300"> 
+<span><strong>Name: </strong>Woman Woman</span>
+<p><strong>Email: </strong>wonderwoman@yahoo.com</p>
+</div> 
+<div style="width: 300px; margin-right: 50px; margin-bottom: 40px">
+<img src="./screenshots/profile3.png" alt="Logo" width="300"> <span><strong>Name: </strong>Bill Gates</span>
+<p><strong>Email: </strong>bill@tonote.com</p>
+</div>
+<p>./src/pages/Authentication/SignIn.tsx</p>
+<p><strong>Register Screen</strong></p>  
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
@@ -301,32 +289,41 @@ export function getProfile(token: Token) {
   });
 ```
 
+</td>
+</tr>
+</table>
+
 <br/>
 
 ### 2. Document Upload
-
-i. Registering
 
 ```sh
 POST https://dev-api.gettonote.com/api/v1/document-upload-convert
 ```
 
-<div style="float: left;">
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/file-upload-onChange.png" alt="Logo" width="600">
-    <p>Before upload</p> 
-  </div>
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/file-upload-sent.png" alt="Logo" width="600">
-    <p>After upload</p>
-  </div>
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/file-upload-too-large.png" alt="Logo" width="600">
-    <p>File too large</p>
-  </div>
-<p>./src/pages/Dashboard/UploadDocument.tsx</p>
-<p><strong>Upload Document Screen</strong></p> 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/file-upload-onChange.png" alt="Logo" width="600">
+<p>Before upload</p> 
 </div>
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/file-upload-sent.png" alt="Logo" width="600">
+<p>After upload</p>
+</div>
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/file-upload-too-large.png" alt="Logo" width="600">
+<p>File too large</p>
+</div>
+<p>./src/pages/Dashboard/UploadDocument.tsx</p>
+<p><strong>Upload Document Screen</strong></p>
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
@@ -374,23 +371,34 @@ export function uploadDocument(data: FileData, token: Token) {
 }
 ```
 
+</td>
+</tr>
+</table>
+
 <br/>
 
 ### 3. Displaying Document
 
-i. Documents List
+<h4 style="font-size: 1.4rem;">i. Documents List</h4>
 
 ```sh
 POST https://dev-api.gettonote.com/api/v1/documents
 ```
 
-<div style="float: left;">
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/documents-list.png" alt="Logo" width="600">
-  </div> 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+
+<img src="./screenshots/documents-list.png" alt="Logo" width="600">
 <p>./src/pages/Dashboard/DocumentsList.tsx</p>
-<p><strong>Documents List Screen</strong></p> 
-</div>
+<p><strong>Documents List Screen</strong></p>
+
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
@@ -413,21 +421,32 @@ export function getDocuments(token: Token) {
 }
 ```
 
-<div style="clear: both;"></div>
+</td>
+</tr>
+</table>
 
-ii. View Document
+<br/>
+
+<h4 style="font-size: 1.4rem;">ii. View Document</h4>
 
 ```sh
 GET https://dev-api.gettonote.com/api/v1/documents/{document_id}
 ```
 
-<div style="float: left;">
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/view-document.png" alt="Logo" width="600">
-  </div> 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td>
+
+<img src="./screenshots/view-document.png" alt="Logo" width="600">
 <p>./src/pages/Dashboard/DocumentsList.tsx</p>
-<p><strong>Documents List Screen</strong></p> 
-</div>
+<p><strong>Documents List Screen</strong></p>
+
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
@@ -450,6 +469,10 @@ export function getDocument(document_id: string, token: Token) {
 }
 ```
 
+</td>
+</tr>
+</table>
+
 <br/>
 
 ### 5. Document Participants
@@ -462,34 +485,36 @@ POST https://dev-api.gettonote.com/api/v1/document-participants
 POST https://dev-api.gettonote.com/api/v1/document-participants-send-email
 ```
 
-<div style="float: left;">
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/participants.png" alt="Logo" width="600"> 
-    <p>Retrieve Participants</p>
-  </div> 
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/send-email-invite.png" alt="Logo" width="600"> 
-    <p>Display and Fill Form to Send Email Invite</p>
-  </div> 
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/send-email-invite-2.png" alt="Logo" width="600"> 
-    <p>Email Invite Successfully Sent</p>
-  </div> 
-  <div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
-    <img src="./screenshots/participants-2.png" alt="Logo" width="600"> 
-    <p>Participants List Updated (after page refresh)</p>
-  </div> 
+<table>
+<tr>
+<th>Component</th>
+<th>API Call</th>
+</tr>
+<tr>
+<td> 
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/participants.png" alt="Logo" width="600"> 
+<p>Retrieve Participants</p>
+</div> 
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/send-email-invite.png" alt="Logo" width="600"> 
+<p>Display and Fill Form to Send Email Invite</p>
+</div> 
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/send-email-invite-2.png" alt="Logo" width="600"> 
+<p>Email Invite Successfully Sent</p>
+</div> 
+<div style="width: 400px; margin-right: 50px; margin-bottom: 20px">
+<img src="./screenshots/participants-2.png" alt="Logo" width="600"> 
+<p>Participants List Updated (after page refresh)</p>
+</div> 
 <p>./src/pages/Dashboard/ViewDocument.tsx</p>
 <p><strong>ViewDocument Screen</strong></p> 
-</div>
+</td>
+<td>
 
 ```js
 // ./src/utils/types.ts
-export type Token = {
-  token?: string,
-  token_type?: string,
-};
-
 export type Participant = {
   document_id: string,
   first_name: string,
@@ -540,6 +565,10 @@ export function sendParticipantEmailInvitation(
   });
 }
 ```
+
+</td>
+</tr>
+</table>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
