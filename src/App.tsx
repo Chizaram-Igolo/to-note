@@ -55,7 +55,7 @@ function App() {
                         element={<ViewDocument />}
                       />
                       <Route
-                        path="/dashboard/sign-document"
+                        path="/dashboard/sign-document/:id"
                         element={<SignDocument />}
                       />
                       {/* </Route> */}

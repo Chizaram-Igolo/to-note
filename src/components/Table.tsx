@@ -35,11 +35,11 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
   return (
     <>
       {currentItems && (
-        <div className="">
-          <div className="flex gap-8 mb-2 font-semibold">
+        <>
+          <div className="flex gap-4 mb-2 font-semibold">
             <span className="w-[1.8rem] text-sm mt-[0.24rem]">S/N</span>
 
-            <div className="w-[40%]">
+            <div className="w-[35%]">
               <span className="text-sm">Document ID</span>
             </div>
 
@@ -47,20 +47,24 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
               <span className="text-sm">Is Signed</span>
             </div>
 
-            <div className="w-[18%]">
+            <div className="w-[20%]">
               <span className="text-sm">Created</span>
             </div>
 
-            <div className="w-[18%]">
+            <div className="w-[20%]">
               <span className="text-sm">Updated</span>
+            </div>
+
+            <div className="w-[10%]">
+              <span className="text-sm"></span>
             </div>
           </div>
 
           {currentItems.map((item, idx) => (
-            <div key={item.id} className="flex gap-8 mb-2">
+            <div key={item.id} className="flex gap-4 mb-2">
               <span className="w-[1.8rem] text-sm mt-[0.24rem]">{idx + 1}</span>
 
-              <div className="w-[40%]">
+              <div className="w-[35%]">
                 <span className="mr-2 text-red-600">
                   <FontAwesomeIcon icon={faFilePdf} />
                 </span>
@@ -75,21 +79,31 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
               </div>
 
               <div className="w-[8%]">
-                <span className="text-sm">
+                <span className="text-xs">
                   {(item.signed_signatures as number) > 0 ? "Yes" : "No"}
                 </span>
               </div>
 
-              <div className="w-[18%]">
-                <span className="text-sm">{formatDate(item.created_at)}</span>
+              <div className="w-[20%]">
+                <span className="text-xs">{formatDate(item.created_at)}</span>
               </div>
 
-              <div className="w-[18%]">
-                <span className="text-sm"> {formatDate(item.updated_at)}</span>
+              <div className="w-[20%]">
+                <span className="text-xs"> {formatDate(item.updated_at)}</span>
+              </div>
+
+              <div className="w-[10%]">
+                {" "}
+                <Link
+                  to={`/dashboard/sign-document/${item.id}`}
+                  className="underline"
+                >
+                  <span className="text-sm">Sign</span>
+                </Link>
               </div>
             </div>
           ))}
-        </div>
+        </>
       )}
 
       <ReactPaginate
@@ -101,7 +115,7 @@ export default function Table({ documents }: { documents: DocumentType[] }) {
         pageCount={pageCount}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
-        className=""
+        className="mb-8"
       />
     </>
   );

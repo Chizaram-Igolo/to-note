@@ -65,14 +65,6 @@ export default function Sidebar() {
             View a Document
           </Link>
         </li>
-        <li>
-          <Link
-            to="/dashboard/sign-document"
-            className="text-blue-600 hover:underline"
-          >
-            Sign a Document
-          </Link>
-        </li>
       </ul>
     </div>
   );

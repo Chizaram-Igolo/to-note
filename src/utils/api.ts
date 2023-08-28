@@ -137,3 +137,17 @@ export function sendParticipantEmailInvitation(
     data,
   });
 }
+
+// Document Signing
+
+// export function get(document_id: string, token: Token) {
+//   return axios({
+//     method: "get",
+//     url: `${API_URL}document-participant-add-self/${document_id}`,
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json;charset=UTF-8",
+//       Authorization: `Bearer ${token.token}`,
+//     },
+//   });
+// }

@@ -25,7 +25,7 @@ export default function DocumentsList() {
   return (
     <>
       <Navbar />
-      <div className="min-w-[900px] w-[90%] flex flex-col mt-12 ml-8">
+      <div className="min-w-[900px] w-[96%] flex flex-col mt-12 ml-8">
         <h2 className="text-xl font-semibold mb-4">View a Document</h2>
         {isLoading ? (
           <>
