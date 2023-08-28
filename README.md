@@ -53,7 +53,7 @@
 
 ## About The Project
 
-![To-Note Document Manager](/screenshots/dashboard-view-document.png)
+![To-Note-Document-Manager](/screenshots/dashboard-view-document.png)
 
 This is a frontend application built with React.js that consumes the endpoints listed at https://dev-api.gettonote.com/api/docs.
 
