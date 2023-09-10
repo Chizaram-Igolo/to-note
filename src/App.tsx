@@ -7,26 +7,8 @@ import SignIn from "./pages/Authentication/SignIn";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 import "./App.css";
-import Protected from "./pages/Authentication/Protected";
-
-// function Home() {
-
-// }
 
 function App() {
-  const token = localStorage.getItem("to-note") as string;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!token) {
-      // setToken(localStorage.getItem("to-note") as string);
-      // navigate("/login");
-      setIsLoggedIn(true);
-    }
-  }, [token]);
-
   return (
     <Routes>
       <Route path="/" element={<SignIn />} />
