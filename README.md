@@ -9,11 +9,9 @@
 <div align="center"> 
   <img src="./public/tonote-logo.png" alt="Logo" width="300">
 
-  <h3 align="center">Frontend Assessment Test</h3>
+  <h3 align="center">Collaborative Document Signing Manager</h3>
 
   <p align="center">
-    Collaborative Document Signing Manager
-    <br />
     <a href="https://to-note-omega.vercel.app"><strong>See Live Version »</strong></a>
     <br />
     <br />
